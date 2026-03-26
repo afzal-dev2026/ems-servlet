@@ -44,40 +44,6 @@ src/
            ├── WEB-INF/
            └── *.jsp
 
-
-## How to Run
-1. Import the project into Eclipse
-2. Configure Apache Tomcat
-3. Create the MySQL database and required tables
-4. Update database username and password in `DBConnection.java`
-5. Run the project on Tomcat
-6. Open the application in the browser
-
-## Roles
-
-### Admin
-- Add employee
-- Edit employee
-- Delete employee
-- View employees
-- Access dashboard
-
-### User
-- View dashboard
-- View employees only
-
-## Screenshots
-
-### Login Page
-(Add screenshot here)
-
-### Dashboard
-(Add screenshot here)
-
-### Employee List
-(Add screenshot here)
-
-### Add Employee
 (Add screenshot here)
 
 ## Author
