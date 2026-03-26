@@ -44,7 +44,6 @@ src/
            ├── WEB-INF/
            └── *.jsp
 
-(Add screenshot here)
 
 ## Author
 Muhammad Afzal
