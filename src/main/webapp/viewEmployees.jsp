@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, model.Employee"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
 if (session.getAttribute("user") == null) {
@@ -76,45 +77,38 @@ String role = (String) session.getAttribute("role");
                 <th>Action</th>
             </tr>
 
-<%
-    List<Employee> list = (List<Employee>) request.getAttribute("empList");
+            <c:forEach var="emp" items="${empList}">
+                <tr>
+                    <td>${emp.id}</td>
+                    <td>${emp.firstName}</td>
+                    <td>${emp.lastName}</td>
+                    <td>${emp.email}</td>
+                    <td>${emp.phone}</td>
+                    <td>${emp.department}</td>
+                    <td>${emp.jobTitle}</td>
+                    <td>${emp.salary}</td>
+                    <td>${emp.dateOfJoining}</td>
+                    <td>${emp.status}</td>
+                    <td class="action-links">
+                        <% if ("admin".equals(role)) { %>
+                            <a href="editEmployee?id=${emp.id}">Edit</a>
+                            <a href="deleteEmployee?id=${emp.id}"
+                               onclick="return confirm('Are you sure you want to delete this employee?')">
+                               Delete
+                            </a>
+                        <% } else { %>
+                            View Only
+                        <% } %>
+                    </td>
+                </tr>
+            </c:forEach>
 
-    if (list != null && !list.isEmpty()) {
-        for (Employee emp : list) {
-%>
-            <tr>
-                <td><%= emp.getId() %></td>
-                <td><%= emp.getFirstName() %></td>
-                <td><%= emp.getLastName() %></td>
-                <td><%= emp.getEmail() %></td>
-                <td><%= emp.getPhone() %></td>
-                <td><%= emp.getDepartment() %></td>
-                <td><%= emp.getJobTitle() %></td>
-                <td><%= emp.getSalary() %></td>
-                <td><%= emp.getDateOfJoining() %></td>
-                <td><%= emp.getStatus() %></td>
-                <td class="action-links">
-                    <% if ("admin".equals(role)) { %>
-                        <a href="editEmployee?id=<%= emp.getId() %>">Edit</a>
-                        <a href="deleteEmployee?id=<%= emp.getId() %>"
-                           onclick="return confirm('Are you sure you want to delete this employee?')">
-                           Delete
-                        </a>
-                    <% } else { %>
-                        View Only
-                    <% } %>
-                </td>
-            </tr>
-<%
-        }
-    } else {
-%>
-            <tr>
-                <td colspan="11">No Employees Found</td>
-            </tr>
-<%
-    }
-%>
+            <c:if test="${empty empList}">
+                <tr>
+                    <td colspan="11">No Employees Found</td>
+                </tr>
+            </c:if>
+
         </table>
     </div>
 
